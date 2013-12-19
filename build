@@ -1,0 +1,26 @@
+ABSOLUTE_PATH=`pwd`
+
+# libpng
+echo
+echo "Configuring libpng"
+cd libpng/src
+emconfigure ./configure
+echo
+echo "Cleaning old build (if any)"
+make clean
+echo "Making libpng"
+emmake make
+cd ../..
+
+# libwebp
+echo
+echo "Configuring libwebp"
+cd libwebp
+emconfigure ./configure --with-pngincludedir=$ABSOLUTE_PATH/libpng/src --with-pnglibdir=$ABSOLUTE_PATH/libpng/src
+echo
+echo "Cleaning old build (if any)"
+make clean
+echo
+echo "Making libwebp"
+emmake make
+cd ..
